@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.dev.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.dev.js.map"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.js.map"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.slim.dev.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.slim.dev.js.map"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.slim.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.slim.js.map"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="libraries/p5.min.js"></script>
+  <script src="libraries/p5.dom.min.js"></script>
+  <script src="libraries/p5.sound.min.js"></script>
+  <script src="src/client.js"></script>
+  <script src="src/screen.js"></script>
+  
+  <script src="src/properties/userMovement.js"></script>
+  <script src="src/properties/position.js"></script>
+  <script src="src/properties/graphics/graphics.js"></script>
+  <script src="src/properties/graphics/rawImage.js"></script>
+  <script src="src/properties/graphics/splitImage.js"></script>
+  <script src="src/properties/graphics/animator.js"></script>
+  <script src="src/properties/graphics/imageSet.js"></script>
+  <script src="src/entities/player.js"></script>
+  
+  <script src="src/rawMap.js"></script>
+  <script src="src/main.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Web Pokemon Game</title>
+</head>
+<style>
+    @font-face {
+        font-family: 'pkmnrsi';
+        src: url(gsc.ttf) format('truetype');
+    }
+    body{
+        background-color: #867f7f;
+        margin-right: auto;
+        margin-left: auto;        
+        max-height: 527px;
+        padding-right: 10px;
+        padding-left: 10px;
+        opacity: 1;
+        transition: 1s opacity;
+        position: relative;
+    }
+    #left{
+        position: relative;
+        float: right;
+        height: 400px;
+        width: 300px;
+        background-color: azure;
+        margin-top: 70px;
+        margin-right: 30%;
+        border-radius: 10px;
+        border: solid 4px #eeeeee;
+        color: #eeeeee;
+        background-color: transparent;
+        font-size: 20px;
+        padding: 10px;
+        margin-right: 5px;
+        z-index: 100;
+        font-family: pkmnrsi;
+    }
+    #discription{
+        position: absolute;
+        border-radius: 10px;
+        color: #eeeeee;
+        background-color: transparent;
+        bottom: 5%;
+        left: 30%;
+        z-index: 100;
+    }
+    #photo{
+        position: relative;
+    }
+    #me{
+        position: absolute;
+        left: 25%;
+        z-index: 100;
+    }
+    @font-face {
+        font-family: "Pokemon GB";
+        src: url("https://dl.dropboxusercontent.com/u/10822923/Pokemon_GB/Pokemon_GB.eot?") format("eot"),
+             url("https://dl.dropboxusercontent.com/u/10822923/Pokemon_GB/Pokemon_GB.woff") format("woff"),
+             url("https://dl.dropboxusercontent.com/u/10822923/Pokemon_GB/Pokemon_GB.ttf") format("truetype"),
+             url("https://dl.dropboxusercontent.com/u/10822923/Pokemon_GB/Pokemon_GB.svg#PokemonGB") format("svg");
+        font-weight: normal;
+        font-style: normal;
+      }
+      #button_wrap{
+          position: absolute;
+          z-index: 101;
+          left: 500px;
+          background-color: #eeeeee;
+      }
+      
+      .box {
+        display: none;
+        position: absolute;
+        z-index: 100;
+        left:240px;
+        top:500px;
+        font-size: 13px;
+        font-family: "Pokemon GB", Arial, sans-serif;
+        border-radius: 2px;
+        padding: 8px;
+        width: 350px;
+        height: 50px;
+        line-height: 16px;
+        margin: auto;
+        background: white;
+        border: 1px solid white;
+        box-shadow: 0 1px 0 1px black,
+                    inset 0 1px 0 1px black,
+                    0 0 0 1px black,
+                    inset 0 0 0 1px black;
+      }
+      .box > button{
+        font-family: "Pokemon GB", Arial, sans-serif;
+        width: 2;
+        height: 2;
+        background-color: transparent;
+        border: 5px solid transparent;
+        margin-top: 15px;
+        animation: bounce 0.5s ease-in-out 0 infinite alternate;
+        float: right;
+      }
+      .box > i {
+        width: 2;
+        height: 2;
+        border: 5px solid transparent;
+        border-top-color: black;
+        margin-top: 23px;
+        animation: bounce 0.5s ease-in-out 0 infinite alternate;
+        float: right;
+      }
+      
+      @keyframes bounce {
+        from { margin-top: 20px; }
+        to { margin-top: 23px; }
+      }
+      #npc_01{
+        background-color:transparent;
+        position: absolute;
+        z-index: 100;
+        left: 288px;
+        top: 320px;    
+      }
+      #npc_02{
+        background-color:transparent;
+        position: absolute;
+        z-index: 100;
+        left: 640px;
+        top: 416px;
+      }
+      #npc_03{
+        background-color:transparent;
+        position: absolute;
+        z-index: 100;
+        left: 288px;
+        top: 128px;
+      }
+      #npc_04{
+        background-color:transparent;
+        position: absolute;
+        z-index: 100;
+        left: 96px;
+        top: 32px;
+      }
+      
+</style>
+<body>
+    <div id="npc_01">
+        <img id="npc__01"src="res/npc_changhun_transparent_right.png"/>
+      </div>
+      <div id="npc_02">
+        <img id="npc__02" src="res/npc_jaemin_transparent_left.png"/>
+      </div>
+      <div id="npc_03">
+        <img id="npc__03" src="res/npc_kyung_transparent_right.png"/>
+      </div>
+      <div id="npc_04">
+        <img id="npc__04" src="res/npc_hyungshin_transparent_down.png"/>
+      </div>
+    <div id="left">
+        <div id="photo"><img id="me" width="200px" src="https://www.stickpng.com/assets/images/580b57fcd9996e24bc43c325.png" alt=""></div>
+        <div id="discription">
+            <p>귀여움 : <b id="cute"> 100%</b></p>
+            <p>자신감 : <b id="confidence">100%</b></p>
+            <p>근 력 :  <b id="power">10%</b></p>
+        </div>
+    </div>
+    <div class="box">
+        <b id="name">name</b>
+        <b> : </b>
+        <b id="talking">Huehuehue</b>
+        <button id="yes_button">yes</button>
+        <button id="no_button">no</button>
+    </div>
+    <script>
+      console.log("it's main!");
+        console.log(localStorage.getItem('workout_cnt'));
+        if(parseInt(localStorage.getItem('workout_cnt')) == 1){
+            var img1 = document.getElementById("me");
+            img1.style.left="0%";
+            img1.style.width="300px";
+            img1.src = "muscle_3.png";
+            document.getElementById("cute").innerText = "200%";
+            document.getElementById("confidence").innerText = "300%";
+            document.getElementById("power").innerText = "500%";
+        }else if(localStorage.getItem('workout_cnt') == 2){
+            var img1 = document.getElementById("me");
+            img1.style.width="250px";
+            img1.style.left="10%";
+            img1.src = "muscle2.png";
+            document.getElementById("cute").innerText = "1000%";
+            document.getElementById("confidence").innerText = "300%";
+            document.getElementById("power").innerText = "1000%";
+        }
+        $('#trainer').click(function(){
+            localStorage.setItem('train_type', "squat");
+            console.log(localStorage.getItem('train_type'));
+            event.preventDefault();         
+            newLocation = 'npc_counter.html';            
+            $('body').fadeOut(2500, newpage); 
+        });
+        $('#trainer2').click(function(){
+            localStorage.setItem('train_type', "push_up");
+            console.log(localStorage.getItem('train_type'));
+            event.preventDefault();         
+            newLocation = 'npc_counter.html';            
+            $('body').fadeOut(2500, newpage); 
+        });
+        
+        $('#yes_button').click(function(){
+            event.preventDefault();         
+            newLocation = 'npc_counter.html';            
+            $('body').fadeOut(2500, newpage); 
+        });
+        $('#no_button').click(function(){
+            //event.preventDefault();         
+            //newLocation = 'main.html';            
+            //$('body').fadeOut(10, newpage); 
+            //var t = document.getElementById('talking');
+            $('.box').hide();
+        });
+        function newpage() {            
+            window.location = newLocation;            
+        }
+      
+        
+    </script>
+  
+</body>
+</html>

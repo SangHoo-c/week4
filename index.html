@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <title>Index</title>
+</head>
+<style>
+    body{
+        margin-top: 5%;
+        background-color: #867f7f;
+        margin-right: auto;
+        margin-left: auto;
+        max-width: 1024px;
+        max-height: 527px;
+        padding-right: 10px;
+        padding-left: 10px;
+        z-index: -100;
+        opacity: 1;
+        transition: 1s opacity;
+    }
+    body.fade-out {
+        opacity: 0;
+        transition: none;
+    }
+    #logo{
+        position: absolute;
+        left: 25%;
+        top: 10%;
+    }
+    #logo2{
+        position: absolute;
+        left: 25%;
+        top: 6%;
+    }
+    #picka{
+        position: absolute;
+        bottom: 0px;
+        right: 0px;
+    }
+    #startButton{
+        position: absolute;
+        left: 42%;
+        top: 75%;
+    }
+
+    #main{
+        position: relative;
+        margin-right: auto;
+        margin-left: auto;  
+        background-image: url('https://wallpapercave.com/wp/wp2595124.jpg');
+        width: 1024px;
+        height: 576px;
+        background-size: cover;
+    }
+</style>
+<body>
+    <div id="main">
+        <img id="logo" src="http://pluspng.com/img-png/pokemon-logo-png-pokemon-logo-png-2000.png" width="500" alt="">
+        <img id="logo2" src="icon.png" alt="" width="650">
+        <img id="startButton" src="https://i.gifer.com/origin/fe/fe9eebde5e19b66192281164142359e4.gif" width=150 alt="">
+        <img id="picka" src="https://data.whicdn.com/images/156259434/original.gif"  alt="this slowpoke moves"  width=200/>
+    </div>
+
+
+    <script>
+        //페이지 자연스럽게 로딩하기
+        $(document).ready(function() {
+            $('body').css('display', 'none');            
+            $('body').fadeIn(1000);            
+            
+            
+            $('#startButton').click(function() {            
+            event.preventDefault();         
+            newLocation = 'story_telling.html';            
+            $('body').fadeOut(3000, newpage);            
+            });
+            
+            function newpage() {            
+            window.location = newLocation;            
+            }
+
+            });
+        localStorage.setItem('workout_cnt', 0);
+        console.log(localStorage.getItem('workout_cnt'));
+    </script>
+
+    
+</body>
+</html>

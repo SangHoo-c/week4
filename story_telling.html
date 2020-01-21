@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>story page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head> 
+<style>
+    @font-face {
+        font-family: 'pkmnrsi';
+        src: url(gsc.ttf) format('truetype');
+    }
+
+
+    body{
+        background-color: #867f7f;
+        margin-right: auto;
+        margin-left: auto;
+        max-width: 1024px;
+        max-height: 527px;
+        padding-right: 10px;
+        padding-left: 10px;
+        z-index: -100;
+    }
+    #main{
+        z-index: 1;
+        position: relative;
+        margin-right: auto;
+        margin-left: auto;  
+        background-image: url('https://wallup.net/wp-content/uploads/2016/05/24/143432-nature-Pokemon-748x468.jpg');
+        width: 1024px;
+        height: 527px;
+        background-size: cover;
+    }
+    #jb{
+        z-index: 2;
+        position: absolute;
+        bottom: 0px;
+        left: 23%;    
+    }
+
+    #dialog{
+        font-family: pkmnrsi;
+        margin-top: 50px;
+        width: 970px;
+        height: 150px;
+        margin-left: 6px;
+        margin-right: 24px;
+        border-radius: 10px;
+        border: solid 5px #eeeeee;
+        color: #eeeeee;
+        padding: 20px;
+        font-size: 30px;
+        position: relative;
+        }
+    button{        
+        border-radius: 10px;
+        border: solid 2px #eeeeee;
+        color: #eeeeee;
+        background-color: transparent;
+        font-size: 20px;
+        padding: 10px;
+        
+    }
+    #no_button{
+        margin-top: 3px;
+        position: absolute;
+    }
+    button:hover{
+        background-color: #999999;
+    }
+    .typing-txt{display: none;}
+    #button_next{
+        position: absolute;
+        right: 80px;
+        bottom: 15px;
+    }
+    #button_input{
+        visibility: hidden;
+        position: absolute;
+        right: 15px;
+        bottom: 15px;
+    }
+    .typeing-txt ul{list-style:none;}
+    .typing {  
+         display: inline-block; 
+         animation-name: cursor; 
+         animation-duration: 0.3s; 
+         animation-iteration-count: infinite; 
+    } 
+    @keyframes cursor{ 
+        0%{border-right: 1px solid #fff} 
+         50%{border-right: 1px solid #000} 
+        100%{border-right: 1px solid #fff} 
+    }
+    #audioID{
+        position: absolute;
+        left: 20px;
+    }
+        
+</style>
+<body>
+    <audio id="audioID" autoplay>
+        <source src="101opening.mp3" type="audio/mpeg"> 
+    </audio>
+    
+    <div id="main">
+       <img id="jb" src="jb.png" alt="">
+    </div>
+    <div id="dialog">
+        <div class="typing-txt"> 
+            <ul id="mydialog">
+                <li id="s2"> 안녕하신가!</li>
+                <li id="s2"> 나는 몰입캠프의 의장 장병규라고 하네!</li>
+                <li id="s3">이곳 몰입몬 세상에서는 코딩 마스터를 노리는 코딩 트레이너들이 많지!</li>
+                <li>그들은 건강한 코딩 마스터가 되기 위해 코딩몬과 함께 운동을 병행하면서 살지.</li>
+                <li>그러나 요즘 코딩 트레이너들의 건강에 문제가 많다는 소식을 들었네!</li>
+                <li>세상에는 코딩도 중요하지만, 코딩 말고도 중요한 것들이 아주 많다네!</li>
+                <li>그것들을 경험하는 것이 코딩보다 더 중요하다고 나는 생각하네!</li>
+                <li>자, 자네는 준비가 되었는가?</li>
+                <li>꿈과 희망이 가득한 곳, 몰입몬 세상으로 떠나는 모험말이다! </li>
+                <li>자, 가라!!!</li>
+                <li>가서 세계 제일의 코딩마스터가 되거라!</li>
+            </ul>          
+        </div> 
+        <p class="typing"></p> 
+    </div>   
+    
+    
+    <script>
+        //페이지 자연스럽게 로딩하기
+        $(document).ready(function() {
+            $('body').css('display', 'none');            
+            $('body').fadeIn(4000);           
+        
+            
+            });
+            //var s3 = document.getElementById('s3');
+            //대화 조정가능
+            //s3.innerText="let's squat!!";
+        console.log("let go to main");
+    </script>
+    <script src="typing_effect2.js"></script>
+    
+</body>
+</html>

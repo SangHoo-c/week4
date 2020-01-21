@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>npc_page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head> 
+
+
+<style>
+    @font-face {
+        font-family: 'pkmnrsi';
+        src: url(gsc.ttf) format('truetype');
+    }
+    body{
+        background-color: #867f7f;
+        margin-right: auto;
+        margin-left: auto;
+        max-width: 1024px;
+        max-height: 527px;
+        padding-right: 10px;
+        padding-left: 10px;
+        z-index: -100;
+    }
+
+    #main{
+        position: relative;
+        margin-right: auto;
+        margin-left: auto;  
+        background-image: url('https://i.pinimg.com/originals/c1/ab/07/c1ab076d234047f036a7a5dd7a7267a8.png');
+        width: 1024px;
+        height: 527px;
+        background-size: cover;
+    }
+    #monster{
+        position: absolute;
+        right: 25%;
+        top: 20%;
+    }
+    #me{
+        position: absolute;
+        left: 20%;
+        bottom: 13%;
+    }
+
+    #dialog{
+        font-family: pkmnrsi;
+        margin-top: 50px;
+        width: 970px;
+        height: 150px;
+        margin-left: 6px;
+        margin-right: 24px;
+        border-radius: 10px;
+        border: solid 5px #eeeeee;
+        color: #eeeeee;
+        padding: 20px;
+        font-size: 30px;
+        position: relative;
+        }
+    button{        
+        border-radius: 10px;
+        border: solid 2px #eeeeee;
+        color: #eeeeee;
+        background-color: transparent;
+        font-size: 20px;
+        padding: 10px;
+        margin-right: 5px;
+    }
+    #no_button{
+        margin-top: 3px;
+        position: absolute;
+    }
+    button:hover{
+        background-color: #999999;
+    }
+    .typing-txt{display: none;}
+    #button_input{
+        visibility: hidden;
+        position: absolute;
+        right: 55px;
+        bottom: 15px;
+    }
+    .typeing-txt ul{list-style:none;}
+    .typing {  
+         display: inline-block; 
+         animation-name: cursor; 
+         animation-duration: 0.3s; 
+         animation-iteration-count: infinite; 
+    } 
+    @keyframes cursor{ 
+        0%{border-right: 1px solid #fff} 
+         50%{border-right: 1px solid #000} 
+        100%{border-right: 1px solid #fff} 
+    }
+    #audioID{
+        position: absolute;
+        left: 20px;
+    }
+        
+</style>
+<body>
+    <audio id="audioID" autoplay>
+        <source src="107battle.mp3" type="audio/mpeg"> 
+    </audio>
+
+    <div id="main">
+        <img id="monster" src="https://img.rankedboost.com/wp-content/uploads/2019/11/Pokemon-SS-Machoke.png" alt="">
+        <img id="me" width="130px" src="back.png" alt="">
+    </div>
+
+    <div id="dialog">
+        <div class="typing-txt"> 
+            <ul id="mydialog">
+                <li id="s2">마지막 문장</li>
+                <li id="s3">마지막 문장</li>
+                <li id="s4">마지막 문장</li>
+            </ul>          
+        </div> 
+        <p class="typing"></p> 
+        <div id="button_input">
+            <button id="yes_button">yes</button>
+            <button id="no_button">no</button>
+        </div>
+    </div>   
+    
+    
+    <script>
+        //페이지 자연스럽게 로딩하기
+        var per_name = localStorage.getItem('player_name');
+        console.log(per_name);
+
+        $(document).ready(function() {
+            $('body').css('display', 'none');            
+            $('body').fadeIn(1000);            
+            
+            
+            $('#yes_button').click(function() {            
+            event.preventDefault();         
+            newLocation = 'squat.html';            
+            $('body').fadeOut(2000, newpage);            
+            });
+            
+            function newpage() {            
+            window.location = newLocation;            
+            }
+
+            });
+            var flag = 0;
+            localStorage.setItem('workout_cnt', parseInt(localStorage.getItem('workout_cnt'))+1);
+            console.log(localStorage.getItem('workout_cnt'));
+            if(parseInt(localStorage.getItem('workout_cnt')) == 2){
+                if(flag ==0){
+                    var img_mon = document.getElementById("monster");
+                    img_mon.src = "baby.png";
+                    flag++;
+                }else{
+                    var img1 = document.getElementById("me");
+                    img1.style.left="13%";
+                    img1.style.width="300px";
+                    img1.src = "muscle.png";
+                }
+            }
+            console.log(localStorage.getItem('train_type'));
+            if(localStorage.getItem('train_type') == 'squat'){
+                var s2 = document.getElementById('s2');
+                var s3 = document.getElementById('s3');
+                var s4 = document.getElementById('s4');
+                //운동에 맞는 대화를 여기서 조정가능하다. 
+                s2.innerText= per_name +"이의 코딩몬이 나타났다!"
+                s3.innerText= per_name +": 하하하! 어디 한번 내 코딩몬의 실력을 견뎌내보시지!"
+                s4.innerText= per_name +"의 몰입몬: 스쿼트 10회 실시! "
+            }else if(localStorage.getItem('train_type') == 'push_up'){
+                var s3 = document.getElementById('s3');               
+                s2.innerText= per_name +"이의 코딩몬이 나타났다!"
+                s3.innerText= per_name +": 하하하! 어디 한번 내 코딩몬의 실력을 견뎌내보시지!"
+                s4.innerText= per_name +"의 몰입몬: 푸쉬업 10회 실시! "
+            }
+
+    </script>
+    <script src="typing_effect.js"></script>
+    
+
+</body>
+</html>

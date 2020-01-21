@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <title>main</title>
+</head>
+
+<style>
+    body{
+        background-color: #867f7f;
+        margin-right: auto;
+        margin-left: auto;
+        
+        max-height: 527px;
+        padding-right: 10px;
+        padding-left: 10px;
+        z-index: -100;
+        opacity: 1;
+        transition: 1s opacity;
+    }
+    #left{
+        position: relative;
+        float: left;
+        height: 400px;
+        width: 300px;
+        background-color: azure;
+        margin-top: 70px;
+        margin-left: 80px;
+        border-radius: 10px;
+        border: solid 4px #eeeeee;
+        color: #eeeeee;
+        background-color: transparent;
+        font-size: 20px;
+        padding: 10px;
+        margin-right: 5px;
+    }
+    #discription{
+        position: absolute;
+        border-radius: 10px;
+        color: #eeeeee;
+        background-color: transparent;
+        bottom: 5%;
+        left: 30%;
+    }
+    #photo{
+        position: relative;
+    }
+    #me{
+        position: absolute;
+        left: 25%;
+    }
+    #main{
+        position: relative;
+        margin-right: auto;
+        margin-left: auto;  
+        background-image: url('http://dreammodule.com/images/spee_shot.png');
+        width: 800px;
+        height: 600px;
+        background-size: cover;
+    }
+
+
+
+</style>
+<body>
+    <div id="left">
+        <div id="photo"><img id="me" width="200px" src="https://www.stickpng.com/assets/images/580b57fcd9996e24bc43c325.png" alt=""></div>
+        <div id="discription">
+            <p>귀여움 : <b id="cute"> 100%</b></p>
+            <p>자신감 : <b id="confidence">100%</b></p>
+            <p>근 력 :  <b id="power">10%</b></p>
+        </div>
+    </div>
+
+    <div id="main" >
+
+    </div>
+    <img id="trainer" src="http://cdn.bulbagarden.net/upload/a/a0/ORAS_Ace_Trainer_F.png" alt="">
+    <img id="trainer2" src="http://cdn.bulbagarden.net/upload/a/a1/ORAS_Ace_Trainer_M.png" alt="">
+    <a href="npc_counter.html">go to squat_monster</a>   
+
+    <script>
+        console.log(localStorage.getItem('workout_cnt'));
+        if(parseInt(localStorage.getItem('workout_cnt')) == 1){
+            var img1 = document.getElementById("me");
+            img1.style.left="0%";
+            img1.style.width="300px";
+            img1.src = "muscle_3.png";
+            document.getElementById("cute").innerText = "200%";
+            document.getElementById("confidence").innerText = "300%";
+            document.getElementById("power").innerText = "500%";
+        }else if(localStorage.getItem('workout_cnt') == 2){
+            var img1 = document.getElementById("me");
+            img1.style.width="250px";
+            img1.style.left="10%";
+            img1.src = "muscle2.png";
+            document.getElementById("cute").innerText = "1000%";
+            document.getElementById("confidence").innerText = "300%";
+            document.getElementById("power").innerText = "1000%";
+        }
+        $('#trainer').click(function(){
+            localStorage.setItem('train_type', "squat");
+            console.log(localStorage.getItem('train_type'));
+
+            event.preventDefault();         
+            newLocation = 'npc_counter.html';            
+            $('body').fadeOut(2500, newpage); 
+        });
+
+        $('#trainer2').click(function(){
+            localStorage.setItem('train_type', "push_up");
+            console.log(localStorage.getItem('train_type'));
+
+            event.preventDefault();         
+            newLocation = 'npc_counter.html';            
+            $('body').fadeOut(2500, newpage); 
+        });
+
+        function newpage() {            
+            window.location = newLocation;            
+        }
+
+
+
+    </script>
+</body>
+</html>
